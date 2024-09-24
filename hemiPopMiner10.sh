@@ -8,6 +8,7 @@ FEE=60
 # Colors for output
 PINK='\033[1;35m'
 GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
 RESET='\033[0m'
 
 # Function to handle the wallet creation process
@@ -82,6 +83,8 @@ create_wallet() {
     export POPM_STATIC_FEE=$FEE
     export POPM_BFG_URL=$RPC_URL
 
+    # Ensure the wallet directory exists for logging
+    mkdir -p "$HOME/$wallet_dir"  # Ensure the logging directory exists
     # Start miner
     ./popmd > "$HOME/$wallet_dir/miner.log" 2>&1 &
     printf "${PINK}Mining started in wallet %s...${RESET}\n" "$wallet_dir"
