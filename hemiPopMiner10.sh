@@ -100,8 +100,8 @@ main() {
 
     # Print success message after all 10 wallets have started mining
     printf "${PINK}Mining successfully started in all 10 wallets${RESET}\n"
-    printf "${GREEN}Created by: https://x.com/Arun__993${RESET}\n"
-    printf "${GREEN}Special Thanks to: https://x.com/ZunXBT${RESET}\n"
+    printf "${YELLOW}Created by: https://x.com/Arun__993${RESET}\n"
+    printf "${YELLOW}Special Thanks to: https://x.com/ZunXBT${RESET}\n"
 }
 
 # Run the main function
