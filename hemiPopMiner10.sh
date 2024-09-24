@@ -13,7 +13,7 @@ RESET='\033[0m'
 
 # Function to handle the wallet creation process
 create_wallet() {
-    local wallet_dir=$1
+    local wallet_dir="$HOME/$1"
     mkdir -p "$wallet_dir" && cd "$wallet_dir" || return 1
 
     # Pull main file
@@ -43,7 +43,7 @@ create_wallet() {
             printf "${PINK}Error: Failed to generate new wallet${RESET}\n" >&2
             return 1
         fi
-        local address_file="$HOME/popm-address.json"
+        local address_file="$wallet_dir/popm-address.json"
         printf "%s\n" "$new_wallet" > "$address_file"
         
         # Extract private key from the new wallet JSON (assuming it's formatted properly)
@@ -83,10 +83,8 @@ create_wallet() {
     export POPM_STATIC_FEE=$FEE
     export POPM_BFG_URL=$RPC_URL
 
-    # Ensure the wallet directory exists for logging
-    mkdir -p "$HOME/$wallet_dir"  # Ensure the logging directory exists
-    # Start miner
-    ./popmd > "$HOME/$wallet_dir/miner.log" 2>&1 &
+    # Start miner and ensure the log file is created in the correct directory
+    ./popmd > "$wallet_dir/miner.log" 2>&1 &
     printf "${PINK}Mining started in wallet %s...${RESET}\n" "$wallet_dir"
 }
 
